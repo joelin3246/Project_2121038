@@ -283,12 +283,12 @@ void F_HT165XWrite(rt_uint32_t data)
   }
 }
 /*============================================================================
-* Function	: F_SetDisplayRam
+* Function	: F_Ht165xSetDisplayRam
 * Description	: ?? LCD RAM ? 0 or 1
 * Input 		: uInt8 => SetClear is ????  0:0x00 1=0xFF
 * Return Value : void
 =============================================================================*/
-void F_SetDisplayRam(rt_uint8_t SetClear)
+void F_Ht165xSetDisplayRam(rt_uint8_t SetClear)
 {
   rt_uint8_t i;
   if(SetClear)
@@ -303,12 +303,12 @@ void F_SetDisplayRam(rt_uint8_t SetClear)
   }
 }
 /*============================================================================
-* Function	: F_Display
+* Function	: F_Ht165XDisplay
 * Description	: ?RAM???Driver
 * Input 		: void
 * Return Value : void
 =============================================================================*/
-void F_Display(void)
+void F_Ht165XDisplay(void)
 {
   rt_uint8_t i;
   
@@ -339,7 +339,7 @@ int F_InitialHT165x_GPIO(void)
 
   RCC_AHBPeriphClockCmd(P_HT165XCS_GPIO_CLK, ENABLE);
   
-  // Configure the P_HT162XCS_PIN  pin
+  // Configure the P_HT165XCS_PIN  pin
   GPIO_InitStructure.GPIO_Pin = P_HT165XCS_PIN ;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;

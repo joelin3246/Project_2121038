@@ -56,6 +56,7 @@ static void sport_time_timeout_callbak(void* parameter)
 				temp |= time_1s_val;
 			}		
 
+
 		SleepTime1s++;
 		if(SleepTime1s >=100) 
 		{

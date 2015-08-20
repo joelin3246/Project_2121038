@@ -7,7 +7,7 @@
 #include <string.h>
 #include "scan_key_led.h"
 #include "bz.h"
-#include "ht1650.h"
+#include "Display.h"
 #include "number_process.h"
 #include "pwm_vms.h"
 #include "sleeping.h"
@@ -494,7 +494,9 @@ extern rt_uint32_t F_ChangeMileToKm(rt_uint32_t Data);
 #define time_100ms_val		0x0008
 #define time_500ms_val		0x0010
 #define time_1s_val				0x0020
+#define time_10s_val			0x0040
 #define sleep_time_1s_val	0x10000		//不同線程 ，事件旗標從16位元後開始
+
 
 extern struct rt_event			sport_timer_event;
 

@@ -14,10 +14,15 @@
  
 #include <rthw.h>
 
+//----------------------------------------------------------
 #define C_LCDRamSize 				64
 
-extern void F_Ht165xSetDisplayRam(rt_uint8_t SetClear);
+extern void F_SetDisplayRam(rt_uint8_t SetClear);
 
-extern void F_Ht165XDisplay(void);
+extern void F_Display(void);
 
 extern rt_uint32_t LCDBuffer[C_LCDRamSize];
+
+//----------------------------------------------------------
+
+

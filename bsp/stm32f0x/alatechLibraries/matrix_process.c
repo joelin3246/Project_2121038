@@ -168,23 +168,31 @@ D_COM09,D_COM10,D_COM11,D_COM12,D_COM13,D_COM14,D_COM15,D_COM16,
 D_COM17,D_COM18,D_COM19,D_COM20,D_COM21,D_COM22,D_COM23,D_COM24,
 D_COM25,D_COM26,D_COM27,D_COM28,D_COM29,D_COM30,D_COM31,D_COM32
 };
-*/
+
 const rt_uint32_t LcdBit[]={
 D_COM32,D_COM31,D_COM30,D_COM29,D_COM28,D_COM27,D_COM26,D_COM25,
 D_COM24,D_COM23,D_COM22,D_COM21,D_COM20,D_COM19,D_COM18,D_COM17,
 D_COM16,D_COM15,D_COM14,D_COM01,D_COM02,D_COM03,D_COM04,D_COM05,
 D_COM06,D_COM07,D_COM08,D_COM09,D_COM10,D_COM11,D_COM12,D_COM13
 };
+*/
+const rt_uint32_t LcdBit[]={
+	D_COM32,D_COM31,D_COM30,D_COM29,D_COM28,D_COM27,D_COM26,D_COM25,
+	D_COM17,D_COM18,D_COM19,D_COM20,D_COM21,D_COM22,D_COM23,D_COM24,
+	D_COM16,D_COM15,D_COM14,D_COM13,D_COM12,D_COM11,D_COM10,D_COM09,
+	D_COM01,D_COM02,D_COM03,D_COM04,D_COM05,D_COM06,D_COM07,D_COM08
+	
+	
+};
 
-const rt_uint8_t LcdRam[]={         
-r_Seg61,r_Seg02,r_Seg60,r_Seg03,r_Seg59,r_Seg04,r_Seg58,r_Seg05,
-r_Seg57,r_Seg06,r_Seg56,r_Seg07,r_Seg55,r_Seg08,r_Seg54,r_Seg09,
-r_Seg53,r_Seg10,r_Seg52,r_Seg11,r_Seg51,r_Seg12,r_Seg50,r_Seg13,
-r_Seg49,r_Seg14,r_Seg48,r_Seg15,r_Seg47,r_Seg16,r_Seg46,r_Seg17,
-r_Seg45,r_Seg18,r_Seg44,r_Seg19,r_Seg43,r_Seg20,r_Seg42,r_Seg21,
-r_Seg41,r_Seg22,r_Seg40,r_Seg23,r_Seg39,r_Seg24,r_Seg38,r_Seg25,
-r_Seg37,r_Seg26,r_Seg36,r_Seg27,r_Seg35,r_Seg28,r_Seg34,r_Seg29,
-r_Seg33,r_Seg30,r_Seg32,r_Seg31
+const rt_uint8_t LcdRam[]={
+	r_Seg00,r_Seg01,r_Seg02,r_Seg03,r_Seg04,r_Seg05,r_Seg06,r_Seg07,r_Seg08,r_Seg09,
+	r_Seg10,r_Seg11,r_Seg12,r_Seg13,r_Seg14,r_Seg15,r_Seg16,r_Seg17,r_Seg18,r_Seg19,
+	r_Seg20,r_Seg21,r_Seg22,r_Seg23,r_Seg24,r_Seg25,r_Seg26,r_Seg27,r_Seg28,r_Seg29,
+	r_Seg30,r_Seg31,r_Seg32,r_Seg33,r_Seg34,r_Seg35,r_Seg36,r_Seg37,r_Seg38,r_Seg39,
+	r_Seg40,r_Seg41,r_Seg42,r_Seg43,r_Seg44,r_Seg45,r_Seg46,r_Seg47,r_Seg48,r_Seg49,
+	r_Seg50,r_Seg51,r_Seg52,r_Seg53,r_Seg54,r_Seg55,r_Seg56,r_Seg57,r_Seg58,r_Seg59,
+	r_Seg60
 };
 
 //==============================================================================
@@ -316,7 +324,7 @@ static void	F_ShowMatrixFontChange(rt_coordinate_t adr,rt_uint32_t data,rt_uint3
 		rt_uint32_t	dataTemp,k,lcdBitAdrTemp;
 
 		lcdRamAdrTemp = LcdRam[adr.x];
-		
+	
 		//if(lcdRamAdrTemp>r_Seg63) {
 		//	lcdRamAdrTemp=r_Seg63;		//«OÅ@ displayAdr ¦ì§} ·¸¦ì
 		//}

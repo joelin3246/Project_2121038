@@ -14,7 +14,7 @@
         <TargetCommonOption>
           <Device>STM32F072CB</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F0xx_DFP.1.2.0</PackID>
+          <PackID>Keil.STM32F0xx_DFP.1.4.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x08000000,0x20000) IRAM(0x20000000,0x4000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -502,6 +502,16 @@
               <FileName>ht1650.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\drivers\ht1650.c</FilePath>
+            </File>
+            <File>
+              <FileName>ht1621.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\ht1621.c</FilePath>
+            </File>
+            <File>
+              <FileName>Display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\drivers\Display.c</FilePath>
             </File>
           </Files>
         </Group>

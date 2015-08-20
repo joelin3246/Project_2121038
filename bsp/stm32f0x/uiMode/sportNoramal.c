@@ -178,6 +178,7 @@ void F_SportNoramal(void)
 							F_distance_process(&distance_data);
 						}
 				}
+				
 			}
 }
 

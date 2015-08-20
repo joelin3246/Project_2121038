@@ -23,8 +23,6 @@
 #define P_KBSense_PIN2                  GPIO_Pin_2
 #define P_KBSense_PIN3                  GPIO_Pin_3
 #define P_KBSense_PIN4                  GPIO_Pin_4
-#define P_KBSense_PIN5                  GPIO_Pin_5 
-#define P_KBSense_PIN6                  GPIO_Pin_6
 #define P_KBSense_GPIO_PORT             GPIOA
 #define P_KBSense_GPIO_CLK              RCC_AHBPeriph_GPIOA
 //KBScan 
@@ -32,7 +30,6 @@
 #define P_KBScan_PIN2                   GPIO_Pin_4
 #define P_KBScan_PIN3                   GPIO_Pin_5
 #define P_KBScan_PIN4                   GPIO_Pin_6
-#define P_KBScan_PIN5                   GPIO_Pin_7
 #define P_KBScan_GPIO_PORT              GPIOB
 #define P_KBScan_GPIO_CLK               RCC_AHBPeriph_GPIOB
 
@@ -41,7 +38,6 @@
 #define ScanLine2Out(x)		if(x)   GPIO_SetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN2); else  GPIO_ResetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN2);
 #define ScanLine3Out(x)		if(x)   GPIO_SetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN3); else  GPIO_ResetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN3);
 #define ScanLine4Out(x)		if(x)   GPIO_SetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN4); else  GPIO_ResetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN4);
-#define ScanLine5Out(x)		if(x)   GPIO_SetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN5); else  GPIO_ResetBits(P_KBScan_GPIO_PORT, P_KBScan_PIN5);
 
 
 #define RT_KEY_NUM_1			1
@@ -109,7 +105,7 @@ rt_uint8_t F_ReadScanKey(void)
   rt_uint16_t ReadkeyData=0;
   ReadkeyData = ~GPIO_ReadInputData(P_KBSense_GPIO_PORT);
 	ReadkeyData &= 0x00FF;
-	ReadkeyData &= ~(GPIO_Pin_0 + GPIO_Pin_7);
+	ReadkeyData &= ~(GPIO_Pin_0 + GPIO_Pin_5 + GPIO_Pin_6 + GPIO_Pin_7);
   return (rt_uint8_t)ReadkeyData;       
 }
 //==========================================================
@@ -224,7 +220,6 @@ void	F_ReadKeyCode(rt_uint8_t *KeyCode,rt_bool_t *LongKeyStart,rt_uint16_t *Slee
 		ScanLine2Out(1);
 		ScanLine3Out(1);
 		ScanLine4Out(1);
-		ScanLine5Out(1);
 		F_EEDelay(50);
 		R_ScanKey[0] = F_ReadScanKey();
 	
@@ -232,7 +227,6 @@ void	F_ReadKeyCode(rt_uint8_t *KeyCode,rt_bool_t *LongKeyStart,rt_uint16_t *Slee
 		ScanLine2Out(0);
 		ScanLine3Out(1);
 		ScanLine4Out(1);
-		ScanLine5Out(1);
 		F_EEDelay(50);
 		R_ScanKey[1] = F_ReadScanKey();
 	
@@ -240,7 +234,6 @@ void	F_ReadKeyCode(rt_uint8_t *KeyCode,rt_bool_t *LongKeyStart,rt_uint16_t *Slee
 		ScanLine2Out(1);
 		ScanLine3Out(0);
 		ScanLine4Out(1);
-		ScanLine5Out(1);
 		F_EEDelay(50);
 		R_ScanKey[2] = F_ReadScanKey();
 	
@@ -248,17 +241,8 @@ void	F_ReadKeyCode(rt_uint8_t *KeyCode,rt_bool_t *LongKeyStart,rt_uint16_t *Slee
 		ScanLine2Out(1);
 		ScanLine3Out(1);
 		ScanLine4Out(0);
-		ScanLine5Out(1);
 		F_EEDelay(50);
 		R_ScanKey[3] = F_ReadScanKey();
-		
-		ScanLine1Out(1);
-		ScanLine2Out(1);
-		ScanLine3Out(1);
-		ScanLine4Out(1);
-		ScanLine5Out(0);
-		F_EEDelay(50);
-		R_ScanKey[4] = F_ReadScanKey();
 
     switch(R_ScanKey[0])
     {
@@ -303,17 +287,6 @@ void	F_ReadKeyCode(rt_uint8_t *KeyCode,rt_bool_t *LongKeyStart,rt_uint16_t *Slee
     case  0x10:		KeyRam=RT_KEY_NUM_22;      break;	
     case  0x20:		KeyRam=RT_KEY_NUM_23;      break;
     case	0x40:		KeyRam=RT_KEY_NUM_24;      break;  
-    default :			KeyRam=0;       break;
-    }
-    switch(R_ScanKey[4])
-    {
-    case  0x00:										break;
-    case  0x02:		KeyRam=RT_KEY_NUM_25;      break;
-    case  0x04:		KeyRam=RT_KEY_NUM_26;      break;
-    case  0x08:		KeyRam=RT_KEY_NUM_27;      break;
-    case  0x10:		KeyRam=RT_KEY_NUM_28;      break;	
-    case  0x20:		KeyRam=RT_KEY_NUM_29;      break;
-    case	0x40:		KeyRam=RT_KEY_NUM_30;      break;  
     default :			KeyRam=0;       break;
     }
 
@@ -509,7 +482,7 @@ void	rt_hw_key_led_scan_init(void)
 		// Enable the KBSense
 		RCC_AHBPeriphClockCmd(P_KBSense_GPIO_CLK, ENABLE);
 		// Configure the KBSense pin 
-		GPIO_InitStructure.GPIO_Pin = P_KBSense_PIN1 +P_KBSense_PIN2 + P_KBSense_PIN3 +P_KBSense_PIN4 + P_KBSense_PIN5 + P_KBSense_PIN6;
+		GPIO_InitStructure.GPIO_Pin = P_KBSense_PIN1 +P_KBSense_PIN2 + P_KBSense_PIN3 +P_KBSense_PIN4;
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
 		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -520,7 +493,7 @@ void	rt_hw_key_led_scan_init(void)
 		// Enable the KBScan 
 		RCC_AHBPeriphClockCmd(P_KBScan_GPIO_CLK, ENABLE);
 		// Configure the KBScan pin 
-		GPIO_InitStructure.GPIO_Pin =  P_KBScan_PIN1 + P_KBScan_PIN2 + P_KBScan_PIN3 + P_KBScan_PIN4 + P_KBScan_PIN5;
+		GPIO_InitStructure.GPIO_Pin =  P_KBScan_PIN1 + P_KBScan_PIN2 + P_KBScan_PIN3 + P_KBScan_PIN4;
 		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
 		GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
 		GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
